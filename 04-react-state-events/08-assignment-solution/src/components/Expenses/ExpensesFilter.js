@@ -2,18 +2,18 @@ import "./ExpensesFilter.css";
 
 const ExpensesFilter = (props) => {
   const changeYearHandler = (event) => {
-    console.log("ExpensesFilter::changeYearHandler-start");
-    console.log(event);
+    //console.log("ExpensesFilter::changeYearHandler-start");
+    //console.log(event);
     const selectedYear = event.target.value;
-    console.log(selectedYear);
+    //console.log(selectedYear);
     props.onChangeYear(selectedYear);
-    console.log("ExpensesFilter::changeYearHandler-end");
+    //console.log("ExpensesFilter::changeYearHandler-end");
   };
   return (
     <div className="expenses-filter">
       <div className="expenses-filter__control">
         <label>Filter by year</label>
-        <select onChange={changeYearHandler}>
+        <select value={props.selected} onChange={changeYearHandler}>
           <option value="2023">2023</option>
           <option value="2022">2022</option>
           <option value="2021">2021</option>

@@ -5,17 +5,20 @@ import Card from "../UI/Card";
 import "./Expenses.css";
 
 const Expenses = (props) => {
-  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedYear, setSelectedYear] = useState("2023");
   const onChangeYearHandler = (year) => {
-    console.log("Expenses::onChangeYearHandler-start");
-    console.log(year);
+    //console.log("Expenses::onChangeYearHandler-start");
+    //console.log(year);
     setSelectedYear(year);
-    console.log("Expenses::onChangeYearHandler-end");
+    //console.log("Expenses::onChangeYearHandler-end");
   };
   return (
     <div>
-      <ExpensesFilter onChangeYear={onChangeYearHandler} />
       <Card className="expenses">
+        <ExpensesFilter
+          selected={selectedYear}
+          onChangeYear={onChangeYearHandler}
+        />
         <ExpenseItem
           title={props.items[0].title}
           amount={props.items[0].amount}
