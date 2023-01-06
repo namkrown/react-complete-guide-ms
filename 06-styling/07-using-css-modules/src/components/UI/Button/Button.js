@@ -33,11 +33,7 @@ const Button = styled.button`
 
 const Button = (props) => {
   return (
-    <button
-      type={props.type}
-      className="{styles.button}"
-      onClick={props.onClick}
-    >
+    <button type={props.type} className={styles.button} onClick={props.onClick}>
       {props.children}
     </button>
   );
