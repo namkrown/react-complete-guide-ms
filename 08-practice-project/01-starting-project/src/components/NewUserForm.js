@@ -31,16 +31,22 @@ const NewUserForm = (props) => {
   return (
     <form onSubmit={onSubmitHandler}>
       <div>
-        <label>UserName</label>
+        <label htmlFor="userName">UserName</label>
         <input
+          id="userName"
           type="text"
           value={userName}
           onChange={onUserNameChangeHandler}
         ></input>
       </div>
       <div>
-        <label>Age (Years)</label>
-        <input type="text" value={age} onChange={onAgeChangeHandler}></input>
+        <label htmlFor="age">Age (Years)</label>
+        <input
+          id="age"
+          type="number"
+          value={age}
+          onChange={onAgeChangeHandler}
+        ></input>
       </div>
       <Button type="submit">Add User</Button>
     </form>

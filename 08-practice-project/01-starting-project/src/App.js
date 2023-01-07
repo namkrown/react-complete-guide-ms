@@ -6,8 +6,8 @@ import NewUser from "./components/NewUser";
 
 const App = () => {
   const [users, setUsers] = useState([
-    { id: Math.random(), userName: "Nate W", age: 46 },
-    { id: Math.random(), userName: "Tristan W", age: 14 },
+    { id: Math.random().toString(), userName: "Nate W", age: 46 },
+    { id: Math.random().toString(), userName: "Tristan W", age: 14 },
   ]);
 
   const onAddUserHandler = (user) => {
