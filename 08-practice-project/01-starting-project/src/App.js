@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import "./App.css";
-import Users from "./components/Users";
-import NewUser from "./components/NewUser";
+import Users from "./components/Users/Users";
+import NewUser from "./components/Users/NewUser";
 
 const App = () => {
   const [users, setUsers] = useState([
@@ -11,8 +11,13 @@ const App = () => {
   ]);
 
   const onAddUserHandler = (user) => {
+    /*
     const updatedUsers = [...users, user];
     setUsers(updatedUsers);
+    */
+    setUsers((prevUsers) => {
+      return [user, ...prevUsers];
+    });
   };
 
   return (
