@@ -1,7 +1,7 @@
 import Card from "../UI/Card";
 
 import UsersList from "./UsersList";
-//import styles from "./Users.module.css";
+//import css from "./Users.module.css";
 
 const Users = (props) => {
   return (

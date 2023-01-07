@@ -1,14 +1,14 @@
+import css from "./Button.module.css";
+
 const Button = (props) => {
   return (
-    <div>
-      <button
-        type={props.type}
-        className={props.className}
-        onClick={props.onClick}
-      >
-        {props.children}
-      </button>
-    </div>
+    <button
+      className={`${css.button} ${props.className}`}
+      type={props.type || "button"}
+      onClick={props.onClick}
+    >
+      {props.children}
+    </button>
   );
 };
 

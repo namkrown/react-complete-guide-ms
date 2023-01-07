@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./App.css";
 import Users from "./components/Users/Users";
-import NewUser from "./components/Users/NewUser";
+import AddUser from "./components/Users/AddUser";
 
 const App = () => {
   const [users, setUsers] = useState([
@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <div>
-      <NewUser onAddUser={onAddUserHandler} />
+      <AddUser onAddUser={onAddUserHandler} />
       <Users users={users} />
     </div>
   );
