@@ -11,7 +11,7 @@ const emailReducer = (state, action) => {
       value: action.value,
       isValid: action.value.includes("@"),
     };
-  } else if (action.type == "INPUT_BLUR") {
+  } else if (action.type === "INPUT_BLUR") {
     updatedState = {
       value: state.value,
       isValid: state.value.includes("@"),
