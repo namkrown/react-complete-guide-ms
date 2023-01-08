@@ -13,7 +13,7 @@ const getValue = (state, action, defaultValue) => {
   } else if (defaultValue) {
     value = defaultValue;
   } else {
-    value = undefined;
+    value = null;
   }
   return value;
 };
@@ -47,13 +47,14 @@ const Login = (props) => {
   // reducerFx, initializerArgs
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: "",
-    isValid: undefined,
+    isValid: null,
   });
 
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
     value: "",
-    isValid: undefined,
+    isValid: null,
   });
+
   useEffect(() => {
     console.log("EFFECT RUNNING");
 
@@ -62,31 +63,34 @@ const Login = (props) => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log('Checking form validity!');
-  //     setFormIsValid(
-  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  // Object destructuring, with alias
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
 
-  //   return () => {
-  //     console.log('CLEANUP');
-  //     clearTimeout(identifier);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+  useEffect(() => {
+    // only runs after state updates
+    const identifier = setTimeout(() => {
+      console.log("Checking form validity!");
+      setFormIsValid(emailIsValid && passwordIsValid);
+    }, 500);
+
+    return () => {
+      console.log("CLEANUP");
+      clearTimeout(identifier);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     //setEnteredEmail(event.target.value);
     dispatchEmail({ type: "USER_INPUT", value: event.target.value });
 
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    //setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
     //setEnteredPassword(event.target.value);
     dispatchPassword({ type: "USER_INPUT", value: event.target.value });
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    //setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const validateEmailHandler = () => {
