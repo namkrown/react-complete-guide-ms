@@ -12,6 +12,33 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
+    // Runs during initializatin and after any change
+    console.log("a) Effect Running");
+
+    return () => {
+      console.log("a) Cleanup Running");
+    };
+  });
+
+  useEffect(() => {
+    // Runs during initialization and never again
+    console.log("b) Effect Running");
+
+    return () => {
+      console.log("b) Cleanup Running");
+    };
+  }, []);
+
+  useEffect(() => {
+    // Run during initialization and after any change to email and password
+    console.log("c) Effect Running");
+
+    return () => {
+      console.log("c) Cleanup Running");
+    };
+  }, [enteredEmail, enteredPassword]);
+
+  useEffect(() => {
     // Example of debouncing input
     const timerId = setTimeout(() => {
       console.log("Checking form validity!");
