@@ -8,16 +8,6 @@ import AuthContext from "./context/auth-context";
 function App() {
   const authContext = useContext(AuthContext);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
-
-    if (storedUserLoggedInInformation === "1") {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
   return (
     <React.Fragment>
       <MainHeader />
