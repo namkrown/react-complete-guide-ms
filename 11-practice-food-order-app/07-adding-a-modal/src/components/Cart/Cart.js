@@ -14,7 +14,7 @@ const Cart = (props) => {
   const cartItems = (
     <ul className={css["cart-items"]}>
       {defaultCartItems.map((item) => (
-        <li>{item.name}</li>
+        <li key={item.id}>{item.name}</li>
       ))}
     </ul>
   );
