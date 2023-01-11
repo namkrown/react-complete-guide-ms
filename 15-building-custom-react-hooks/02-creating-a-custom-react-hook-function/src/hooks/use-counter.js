@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useCounter = (props) => {
+const useCounter = () => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
