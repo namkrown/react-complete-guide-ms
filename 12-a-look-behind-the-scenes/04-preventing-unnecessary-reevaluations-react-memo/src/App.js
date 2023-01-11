@@ -6,16 +6,17 @@ import DemoOutput from "./Demo/DemoOutput";
 
 function App() {
   const [, setShowParagraph] = useState(false);
+
   console.log("APP RUNNING");
-  const btnOnClickHandler = (event) => {
-    setShowParagraph((previousShowParagraph) => {
-      setShowParagraph(!previousShowParagraph);
-    });
+
+  const toggleParagraphHandler = () => {
+    setShowParagraph((previousShowParagraph) => !previousShowParagraph);
   };
+
   return (
     <div className="app">
       <h1>Hi there!</h1>
-      <Button onClick={btnOnClickHandler}>Toggle Paragraph</Button>
+      <Button onClick={toggleParagraphHandler}>Toggle Paragraph</Button>
       <DemoOutput show={false} />
     </div>
   );
