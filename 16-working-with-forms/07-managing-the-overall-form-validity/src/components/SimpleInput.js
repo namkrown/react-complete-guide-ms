@@ -25,13 +25,10 @@ const SimpleInput = (props) => {
       setEnteredName("");
       setEnteredNameTouched(false);
     }
-
-    console.log("formSubmissionHandler-end");
   };
 
   const nameInputCss =
     "form-control" + (enteredNameIsInvalid ? " invalid" : "");
-  console.log("nameInputCss=" + nameInputCss);
 
   return (
     <form onSubmit={formSubmissionHandler}>
