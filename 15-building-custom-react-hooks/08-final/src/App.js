@@ -7,37 +7,9 @@ import useHttp from "./hooks/use-http";
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  const httpData = useHttp();
-
   // object destructuring + alias for sendRequest to fetchTasks
-  const { isLoading, error, sendRequest: fetchTasks } = httpData;
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
-  /*
-  const fetchTasks = async (taskText) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(tasksUrl);
-
-      if (!response.ok) {
-        throw new Error("Request failed!");
-      }
-
-      const data = await response.json();
-
-      const loadedTasks = [];
-
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-      }
-
-      setTasks(loadedTasks);
-    } catch (err) {
-      setError(err.message || "Something went wrong!");
-    }
-    setIsLoading(false);
-  };
-  */
   useEffect(() => {
     const baseUrl = "https://<firebase-realtime-database-url>/";
     const tasksUrl = baseUrl + "tasks.json";
