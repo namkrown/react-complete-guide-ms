@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from "react";
 
-import MoviesList from './components/MoviesList';
-import AddMovie from './components/AddMovie';
-import './App.css';
+import MoviesList from "./components/MoviesList";
+import AddMovie from "./components/AddMovie";
+import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -13,13 +13,27 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://swapi.dev/api/films/');
+      const response = await fetch("https://swapi.dev/api/films/");
       if (!response.ok) {
-        throw new Error('Something went wrong!');
+        throw new Error("Something went wrong!");
       }
 
       const data = await response.json();
+      console.log(data);
 
+      const loadedMovies = [];
+
+      for (const key in data) {
+        const movie = {
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        };
+        loadedMovies.push(movie);
+      }
+
+      /*
       const transformedMovies = data.results.map((movieData) => {
         return {
           id: movieData.episode_id,
@@ -29,6 +43,8 @@ function App() {
         };
       });
       setMovies(transformedMovies);
+      */
+      setMovies(loadedMovies);
     } catch (error) {
       setError(error.message);
     }
@@ -39,8 +55,27 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
-  function addMovieHandler(movie) {
+  async function addMovieHandler(movie) {
     console.log(movie);
+
+    try {
+      const url = "https://react-http-6b4a6.firebaseio.com/movies.json";
+      const body = JSON.stringify(movie);
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const fetchConfig = {
+        method: "POST",
+        headers: headers,
+        body: body,
+      };
+      const response = await fetch(url, fetchConfig);
+      const data = response.json();
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   let content = <p>Found no movies.</p>;
