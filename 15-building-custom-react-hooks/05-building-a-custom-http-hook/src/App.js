@@ -2,14 +2,29 @@ import React, { useEffect, useState } from "react";
 
 import Tasks from "./components/Tasks/Tasks";
 import NewTask from "./components/NewTask/NewTask";
+import useHttp from "./hooks/use-http";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [tasks, setTasks] = useState([]);
 
   const tasksUrl = "https://<firebase-realtime-database-url>/tasks.json";
 
+  const transformTasks = (data) => {
+    const loadedTasks = [];
+
+    for (const taskKey in data) {
+      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+    }
+
+    setTasks(loadedTasks);
+  };
+
+  const httpData = useHttp(tasksUrl, transformTasks);
+
+  // alias for sendRequest to fetchTasks
+  const { isLoading, error, sendRequest: fetchTasks } = httpData;
+
+  /*
   const fetchTasks = async (taskText) => {
     setIsLoading(true);
     setError(null);
@@ -34,7 +49,7 @@ function App() {
     }
     setIsLoading(false);
   };
-
+  */
   useEffect(() => {
     fetchTasks();
   }, []);

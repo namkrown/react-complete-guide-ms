@@ -11,9 +11,9 @@ const useHttp = (requestConfig, applyData) => {
     setError(null);
     try {
       const fetchConfig = {
-        method: requestConfig.method,
-        headers: requestConfig.headers,
-        body: JSON.stringify(requestConfig.body),
+        method: requestConfig.method ? requestConfig.method : "GET",
+        headers: requestConfig.headers ? requestConfig.headers : {},
+        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       };
       const response = await fetch(url, fetchConfig);
 
