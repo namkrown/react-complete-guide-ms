@@ -14,6 +14,7 @@ class Users extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.users.length === 0) {
+      console.log("Throwing Error - No users provided");
       throw new Error("No users provided");
     }
   }
