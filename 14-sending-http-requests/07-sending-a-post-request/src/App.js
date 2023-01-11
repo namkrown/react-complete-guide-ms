@@ -9,11 +9,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const moviesUrl = "<firebase-realtime-database-url>/movies.json";
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("https://swapi.dev/api/films/");
+      const response = await fetch(moviesUrl);
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -59,7 +60,7 @@ function App() {
     console.log(movie);
 
     try {
-      const url = "https://react-http-6b4a6.firebaseio.com/movies.json";
+      const url = moviesUrl;
       const body = JSON.stringify(movie);
       const headers = {
         "Content-Type": "application/json",
