@@ -7,21 +7,9 @@ import useHttp from "./hooks/use-http";
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  const tasksUrl = "https://<firebase-realtime-database-url>/tasks.json";
+  const httpData = useHttp();
 
-  const transformTasks = (data) => {
-    const loadedTasks = [];
-
-    for (const taskKey in data) {
-      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-    }
-
-    setTasks(loadedTasks);
-  };
-
-  const httpData = useHttp(tasksUrl, transformTasks);
-
-  // alias for sendRequest to fetchTasks
+  // object destructuring + alias for sendRequest to fetchTasks
   const { isLoading, error, sendRequest: fetchTasks } = httpData;
 
   /*
@@ -51,8 +39,22 @@ function App() {
   };
   */
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    const baseUrl = "https://<firebase-realtime-database-url>/";
+    const tasksUrl = baseUrl + "tasks.json";
+    const requestConfig = {
+      url: tasksUrl,
+    };
+    const transformTasks = (data) => {
+      const loadedTasks = [];
+
+      for (const taskKey in data) {
+        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+      }
+
+      setTasks(loadedTasks);
+    };
+    fetchTasks(requestConfig, transformTasks);
+  }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
     setTasks((prevTasks) => prevTasks.concat(task));

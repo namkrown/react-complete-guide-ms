@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
-const useHttp = (requestConfig, applyData) => {
+const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const url = requestConfig.url;
-
-  const sendRequest = async (taskText) => {
+  const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -15,7 +13,7 @@ const useHttp = (requestConfig, applyData) => {
         headers: requestConfig.headers ? requestConfig.headers : {},
         body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
       };
-      const response = await fetch(url, fetchConfig);
+      const response = await fetch(requestConfig.url, fetchConfig);
 
       if (!response.ok) {
         throw new Error("Request failed!");
@@ -27,7 +25,7 @@ const useHttp = (requestConfig, applyData) => {
       setError(err.message || "Something went wrong!");
     }
     setIsLoading(false);
-  };
+  }, []);
 
   //return { isLoading: isLoading, error: error, sendReaquest: sendRequest };
   return { isLoading, error, sendRequest }; // modern js syntax that isn't as verbose since keys are same

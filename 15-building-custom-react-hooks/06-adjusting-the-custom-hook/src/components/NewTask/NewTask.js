@@ -7,7 +7,8 @@ const NewTask = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const tasksUrl = "https://<firebase-realtime-database-url>/tasks.json";
+  const baseUrl = "https://<firebase-realtime-database-url>/";
+  const tasksUrl = baseUrl + "tasks.json";
 
   const enterTaskHandler = async (taskText) => {
     setIsLoading(true);
