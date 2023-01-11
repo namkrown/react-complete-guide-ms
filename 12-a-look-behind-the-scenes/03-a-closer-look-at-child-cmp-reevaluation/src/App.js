@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 import "./App.css";
 import Button from "./components/UI/Button/Button";
-
+import DemoOutput from "./Demo/DemoOutput";
 function App() {
-  console.log("APP RUNNING");
   const [showParagraph, setShowParagraph] = useState(false);
+  console.log("APP RUNNING");
   const btnOnClickHandler = (event) => {
     setShowParagraph((previousShowParagraph) => {
       setShowParagraph(!previousShowParagraph);
@@ -15,7 +15,7 @@ function App() {
     <div className="app">
       <h1>Hi there!</h1>
       <Button onClick={btnOnClickHandler}>Toggle Paragraph</Button>
-      {showParagraph && <p>This is new!</p>}
+      <DemoOutput show={false} />
     </div>
   );
 }
