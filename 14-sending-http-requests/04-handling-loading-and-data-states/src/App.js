@@ -5,66 +5,80 @@ import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   async function fetchMoviesHandler() {
     // Default sends a get request
     console.log("App::fetchMoviesHandler-start");
 
-    const response = await fetch("https://swapi.dev/api/films");
+    setIsLoading(true);
+    setError(null);
 
-    console.log(
-      "response received status=" +
-        response.status +
-        ", statusText=" +
-        response.statusText
-    );
+    try {
+      const response = await fetch("https://swapi.dev/api/films");
+      //const response = await fetch("https://swapi.dev/api/film"); // gives back status=404
 
-    const data = await response.json();
+      console.log(
+        "response received status=" +
+          response.status +
+          ", statusText=" +
+          response.statusText
+      );
 
-    console.log("response body converted to json finished");
+      if (!response.ok) {
+        throw new Error(
+          "Something went wrong! status=" +
+            response.status +
+            ", statusText=" +
+            response.statusText
+        );
+      }
 
-    const transformedMovies = data.results.map((swapiMovie) => {
-      console.log("mapping swapiMovie id=" + swapiMovie.id);
-      return {
-        id: swapiMovie.episode_id,
-        title: swapiMovie.title,
-        openingTxt: swapiMovie.opening_crawl,
-        releaseDate: swapiMovie.release_date,
-      };
-    });
+      const data = await response.json();
 
-    console.log("finished converting swapiMovies to internalModels");
-    console.log(transformedMovies);
+      console.log("response body converted to json finished");
 
-    setMovies(transformedMovies);
+      const transformedMovies = data.results.map((swapiMovie) => {
+        console.log("mapping swapiMovie id=" + swapiMovie.id);
+        return {
+          id: swapiMovie.episode_id,
+          title: swapiMovie.title,
+          openingTxt: swapiMovie.opening_crawl,
+          releaseDate: swapiMovie.release_date,
+        };
+      });
+
+      console.log("finished converting swapiMovies to internalModels");
+      console.log(transformedMovies);
+
+      setMovies(transformedMovies);
+    } catch (error) {
+      setError(error.message);
+    }
+
+    setIsLoading(false);
 
     console.log("App::fetchMoviesHandler-end");
   }
 
-  /*
-  const dummyMovies = [
-    {
-      id: 1,
-      title: 'Some Dummy Movie',
-      openingText: 'This is the opening text of the movie',
-      releaseDate: '2021-05-18',
-    },
-    {
-      id: 2,
-      title: 'Some Dummy Movie 2',
-      openingText: 'This is the second opening text of the movie',
-      releaseDate: '2021-05-19',
-    },
-  ];
-*/
+  let content = <p>Houston, we have a problem...</p>;
+  if (isLoading) {
+    content = <p>Loading...</p>;
+  } else if (error) {
+    content = <p>{error}</p>;
+  } else if (movies.length <= 0) {
+    content = <p>Found no movies</p>;
+  } else {
+    content = <MoviesList movies={movies} />;
+  }
+
   return (
     <React.Fragment>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
-      <section>
-        <MoviesList movies={movies} />
-      </section>
+      <section>{content}</section>
     </React.Fragment>
   );
 }
