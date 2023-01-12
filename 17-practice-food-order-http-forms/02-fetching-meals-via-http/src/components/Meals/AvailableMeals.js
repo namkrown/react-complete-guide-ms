@@ -6,9 +6,11 @@ import classes from "./AvailableMeals.module.css";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMeals = async () => {
+      // setIsLoading(false); // set if initially false
       //const baseUrl = "https://<firebase.url>/";
       const baseUrl = "https://react-http-87306-default-rtdb.firebaseio.com/";
       const mealsUrl = baseUrl + "meals.json";
@@ -26,6 +28,7 @@ const AvailableMeals = () => {
       }
 
       setMeals(loadedMeals);
+      setIsLoading(false);
     };
 
     fetchMeals();
@@ -40,6 +43,14 @@ const AvailableMeals = () => {
       price={meal.price}
     />
   ));
+
+  if (isLoading) {
+    return (
+      <section className={classes.mealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   return (
     <section className={classes.meals}>
