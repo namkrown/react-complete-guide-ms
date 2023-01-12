@@ -47,7 +47,14 @@ const Checkout = (props) => {
 
     console.log("formIsValid", formIsValid);
 
-    if (!formIsValid) {
+    if (formIsValid) {
+      const userData = {
+        name: enteredName,
+        street: enteredStreet,
+        postalCode: enteredPostalCode,
+        city: enteredCity,
+      };
+      props.onConfirm(userData);
     } else {
     }
   };

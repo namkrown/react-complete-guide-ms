@@ -25,6 +25,24 @@ const Cart = (props) => {
     setCheckoutMode(true);
   };
 
+  const submitOrderHandler = (userData) => {
+    console.log("submitOrderHandler-start", userData);
+    const orderData = {
+      user: userData,
+      orderedItems: cartCtx.items,
+    };
+    //const baseUrl = "https://<firebase.url>/";
+    const baseUrl = "https://react-http-87306-default-rtdb.firebaseio.com/";
+    const ordersUrl = baseUrl + "orders.json";
+    const headers = { "Content-Type": "application/json" };
+    const fetchConfig = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(orderData),
+    };
+    fetch(ordersUrl, fetchConfig);
+    console.log("submitOrderHandler-end", userData);
+  };
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
@@ -60,7 +78,9 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {checkoutMode && <Checkout onCancel={props.onClose} />}
+      {checkoutMode && (
+        <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
+      )}
       {!checkoutMode && modalActions}
     </Modal>
   );
