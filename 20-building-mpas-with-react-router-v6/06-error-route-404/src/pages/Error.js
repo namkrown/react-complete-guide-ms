@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import MainNavigation from "../components/MainNavigation";
 import css from "./Error.module.css";
 
