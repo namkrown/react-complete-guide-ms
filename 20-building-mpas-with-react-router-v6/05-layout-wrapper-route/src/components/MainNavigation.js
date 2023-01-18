@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import css from "./MainNavigation.module.css";
 
 function MainNavigation() {
   return (
-    <header>
+    <header className={css.header}>
       <nav>
-        <ul>
+        <ul className={css.list}>
           <li>
             <Link to="/">Home</Link>
           </li>
