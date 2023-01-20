@@ -7,6 +7,16 @@ export default function EventsPage() {
   return <EventsList events={events} />;
 }
 
+export async function loader() {
+  const response = await fetch("http://localhost:8080/events");
+
+  if (!response.ok) {
+    //setError("Fetching events failed.");
+  } else {
+    const responseData = await response.json();
+    return responseData.events;
+  }
+}
 // Code required without leveraging react-router loader
 /* 
 import { useEffect, useState } from "react";
