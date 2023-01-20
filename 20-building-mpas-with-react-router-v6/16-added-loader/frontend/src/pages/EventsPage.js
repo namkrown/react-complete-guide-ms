@@ -1,8 +1,19 @@
+import { useLoaderData } from "react-router-dom";
+
+import EventsList from "../components/EventsList";
+
+export default function EventsPage() {
+  const events = useLoaderData();
+  return <EventsList events={events} />;
+}
+
+// Code required without leveraging react-router loader
+/* 
 import { useEffect, useState } from "react";
 
 import EventsList from "../components/EventsList";
 
-function EventsPage() {
+function EventsPage() {  
   const [isLoading, setIsLoading] = useState(false);
   const [fetchedEvents, setFetchedEvents] = useState();
   const [error, setError] = useState();
@@ -23,7 +34,7 @@ function EventsPage() {
 
     fetchEvents();
   }, []);
-  return (
+    return (
     <>
       <div style={{ textAlign: "center" }}>
         {isLoading && <p>Loading...</p>}
@@ -33,5 +44,4 @@ function EventsPage() {
     </>
   );
 }
-
-export default EventsPage;
+*/
