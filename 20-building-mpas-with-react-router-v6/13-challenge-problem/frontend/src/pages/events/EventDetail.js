@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 //import EventItem from "../../components/EventItem";
 
 function EventDetailPage() {
+  const params = useParams();
   return (
     <div>
-      <p>Event Detail</p>
+      <p>Event Detail: {params.eventId} </p>
       <p>
         <Link to="edit">Edit</Link>
       </p>
