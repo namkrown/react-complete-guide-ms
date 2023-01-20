@@ -10,7 +10,10 @@ export default function ErrorPage() {
     title = "Not Found!";
     message = "Could not find resource or page.";
   } else if (error.status === 500) {
-    message = JSON.parse(error.data).message;
+    //message = JSON.parse(error.data).message;
+
+    // If leveraging react-router-dom json fx
+    message = error.date.message;
   }
 
   return (
