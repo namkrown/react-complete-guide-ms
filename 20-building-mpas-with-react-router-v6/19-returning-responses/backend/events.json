@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"aaa","image":"https://a.cdn-hotels.com/gdcs/production125/d653/a01517ea-0ec0-4639-b862-33922c62f04a.jpg?impolicy=fcrop&w=800&h=533&q=medium","date":"2023-02-05","description":"asfdf","id":"ef842375-c425-4657-9469-03dcebd8fa77"},{"title":"aa","image":"https://media.cntraveler.com/photos/6123f6bb7dfe5dff926c7675/16:9/w_2560%2Cc_limit/South%2520Korea_GettyImages-1200320719.jpg","date":"2023-02-01","description":"aa","id":"75586969-8ec5-4927-bbe2-312f2f525154"},{"title":"aaa","image":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/1200px-Flag_of_South_Korea.svg.png","date":"2023-01-20","description":"asfsdf","id":"ae60e571-1d33-4e8d-ba8c-6280ae8e5a17"},{"title":"asdfasf","image":"https://keia.org/wp-content/uploads/2022/11/shutterstock_574774783-Seoul-Shops-1024x684.jpg","date":"2023-01-20","description":"asfdsf","id":"2de0889a-970b-49f5-8f89-55912711177e"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
