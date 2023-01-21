@@ -1,19 +1,32 @@
-import { Form, useNavigate, useNavigation } from 'react-router-dom';
+import {
+  Form,
+  useNavigate,
+  useNavigation,
+  useActionData,
+} from "react-router-dom";
 
-import classes from './EventForm.module.css';
+import classes from "./EventForm.module.css";
 
 function EventForm({ method, event }) {
+  const actionData = useActionData();
   const navigate = useNavigate();
   const navigation = useNavigation();
 
-  const isSubmitting = navigation.state === 'submitting';
+  const isSubmitting = navigation.state === "submitting";
 
   function cancelHandler() {
-    navigate('..');
+    navigate("..");
   }
 
   return (
     <Form method="post" className={classes.form}>
+      {actionData && actionData.errors && (
+        <ul>
+          {Object.values(actionData.errors).map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -21,7 +34,7 @@ function EventForm({ method, event }) {
           type="text"
           name="title"
           required
-          defaultValue={event ? event.title : ''}
+          defaultValue={event ? event.title : ""}
         />
       </p>
       <p>
@@ -31,7 +44,7 @@ function EventForm({ method, event }) {
           type="url"
           name="image"
           required
-          defaultValue={event ? event.image : ''}
+          defaultValue={event ? event.image : ""}
         />
       </p>
       <p>
@@ -41,7 +54,7 @@ function EventForm({ method, event }) {
           type="date"
           name="date"
           required
-          defaultValue={event ? event.date : ''}
+          defaultValue={event ? event.date : ""}
         />
       </p>
       <p>
@@ -51,7 +64,7 @@ function EventForm({ method, event }) {
           name="description"
           rows="5"
           required
-          defaultValue={event ? event.description : ''}
+          defaultValue={event ? event.description : ""}
         />
       </p>
       <div className={classes.actions}>
@@ -59,7 +72,7 @@ function EventForm({ method, event }) {
           Cancel
         </button>
         <button disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Save'}
+          {isSubmitting ? "Submitting..." : "Save"}
         </button>
       </div>
     </Form>
