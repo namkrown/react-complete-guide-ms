@@ -1,7 +1,8 @@
 import { redirect } from "react-router-dom";
-//import { removeAuthToken } from "../util/auth";
+import { removeAuthToken } from "../util/auth";
 
 export function action() {
-  localStorage.removeItem("authToken");
+  //localStorage.removeItem("authToken");
+  removeAuthToken();
   return redirect("/");
 }
