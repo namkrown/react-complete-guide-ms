@@ -1,33 +1,32 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import AllQuotes from './pages/AllQuotes';
-import QuoteDetail from './pages/QuoteDetail';
-import NewQuote from './pages/NewQuote';
-import NotFound from './pages/NotFound';
-import Layout from './components/layout/Layout';
+import BlogPage, { loader as postsLoader } from './pages/Blog';
+import HomePage from './pages/Home';
+import PostPage, { loader as postLoader } from './pages/Post';
+import RootLayout from './pages/Root';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: 'posts',
+        children: [
+          { index: true, element: <BlogPage />, loader: postsLoader },
+          { path: ':id', element: <PostPage />, loader: postLoader },
+        ],
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <Layout>
-      <Switch>
-        <Route path='/' exact>
-          <Redirect to='/quotes' />
-        </Route>
-        <Route path='/quotes' exact>
-          <AllQuotes />
-        </Route>
-        <Route path='/quotes/:quoteId'>
-          <QuoteDetail />
-        </Route>
-        <Route path='/new-quote'>
-          <NewQuote />
-        </Route>
-        <Route path='*'>
-          <NotFound />
-        </Route>
-      </Switch>
-    </Layout>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
